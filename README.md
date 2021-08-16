@@ -1,2 +1,2 @@
-# Clone Coding Projects
-
+Nomad Coder
+PaintJS made with VanilaJS
