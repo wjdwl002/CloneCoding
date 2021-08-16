@@ -1,13 +1,5 @@
-@font-face {
-    font-family: 'icomoon';
-    src: url("../fonts/icomoon.eot?o7okb4");
-    src: url(".//fonts/icomoon.eot?o7okb4#iefix") format("embedded-opentype"), url("icomoon.ttf?o7okb4") format("truetype"), url("../fonts/icomoon.woff?o7okb4") format("woff"), url("../fonts/icomoon.svg?o7okb4#icomoon") format("svg");
-    font-weight: normal;
-    font-style: normal; }
-  
   [class^="icon-"], [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
     speak: none;
     font-style: normal;
     font-weight: normal;
@@ -18,13 +10,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
   
-  .icon-menu {
-    color: #000; }
-    .icon-menu:before {
-      content: "\e900"; }
   
   header {
     display: flex; }
+
   
   .sliding--menu__wrapper {
     overflow: hidden;
@@ -54,17 +43,21 @@
         .sliding--menu__wrapper nav ul .site--logo {
           width: 75px;
           padding: 15px; }
-      .sliding--menu__wrapper nav a {
+      .sliding--menu__wrapper nav div {
         color: #fff;
         display: block;
         padding: 15px; }
-        .sliding--menu__wrapper nav a:hover {
+        .sliding--menu__wrapper nav div:hover {
           background: #111; }
     .sliding--menu__wrapper label {
+      position:absolute;
+      left:0px;
+      background-color: grey;
+      border-radius: 0px 10px 10px 0px;
       display: block;
       font-weight: 700;
-      width: 56px;
-      height: 56px;
+      width: 40px;
+      height: 100px;
       line-height: 56px;
       color: #fff;
       text-align: center;
