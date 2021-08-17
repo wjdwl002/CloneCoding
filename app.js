@@ -8,6 +8,10 @@ const mode = document.getElementById('jsMode');
 const clear = document.getElementById('jsClear');
 const themes = document.getElementsByClassName("jsTheme");
 
+const CANVAS_SIZE = 700;
+
+ctx.fillStyle = "white";
+
 
 //색상표
 var colorsSample = [
@@ -21,8 +25,8 @@ var colorsSample = [
     ["#201E1D", "#101C1E", "#304F54", "#638B9A", "#A5C8DF", "#D8E7DB"]
 ]
 
-canvas.width = 700;
-canvas.height = 700;
+canvas.width = CANVAS_SIZE;
+canvas.height = CANVAS_SIZE;
 
 let painting = false; //클릭 상태
 let filling = false; 
@@ -44,6 +48,10 @@ function clearCanvas(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
 }
 
+function handleCanvasClick(event){
+    if(filling) ctx.fillRect(0,0,canvas.width, canvas.height);
+}
+
 function handleModeClick(){
     if(filling === true){
         filling = false;
@@ -59,22 +67,23 @@ function onMouseMove(event){
     //console.log(event.offsetX, event.offsetY); // 여기서 offset 값만 필요
     const x = event.offsetX;
     const y = event.offsetY;
-    if(!painting){
-        changeWidth(event);
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-    }else {
-        ctx.lineTo(x, y);
-        ctx.stroke();
+    if(!filling){
+        if(!painting){
+            changeWidth(event);
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }else {
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
     }
 }
 
 
 function changeColor(event){
     const color = event.target.style.backgroundColor;
-    console.log(color);
-    if(filling) canvas.style.backgroundColor = color;
-    else ctx.strokeStyle = color;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
 }
 
 function changeWidth(event){
@@ -99,6 +108,7 @@ if(canvas){
     canvas.addEventListener('mousedown', startPainting);
     canvas.addEventListener('mouseup', stopPainting);
     canvas.addEventListener('mouseleave',stopPainting);
+    canvas.addEventListener('click', handleCanvasClick);
 }
 
 if(mode) {
