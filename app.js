@@ -6,8 +6,10 @@ const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("jsColor")
 const mode = document.getElementById('jsMode');
 const clear = document.getElementById('jsClear');
+const save = document.getElementById('jsSave');
 const themes = document.getElementsByClassName("jsTheme");
 
+const colorWhite = "#ffffff"
 const CANVAS_SIZE = 700;
 
 ctx.fillStyle = "white";
@@ -27,6 +29,8 @@ var colorsSample = [
 
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
+canvas.fillStyle = colorWhite;
+canvas.style.backgroundColor = colorWhite;
 
 let painting = false; //클릭 상태
 let filling = false; 
@@ -37,7 +41,8 @@ function changeTheme(event){
         colors[i].style.backgroundColor=colorsSample[themeIndex][i];
     }   
     ctx.clearRect(0,0,canvas.width, canvas.height);
-    canvas.style.backgroundColor = "#ffffff";
+    canvas.fillStyle = colorWhite;
+    canvas.style.backgroundColor = colorWhite;
     body[0].style.background = colorsSample[themeIndex][5];
     sidebar[0].style.background = colorsSample[themeIndex][4];
     sidebar[0].style.color = colorsSample[themeIndex][2];
@@ -46,6 +51,14 @@ function changeTheme(event){
 
 function clearCanvas(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
+}
+
+function saveCanvas(){
+    const image = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "PaintJS";
+    link.click();
 }
 
 function handleCanvasClick(event){
@@ -102,6 +115,10 @@ function onMouseDown(event){
     startPainting();
 }
 
+function handleCM(event){
+    return;
+}
+
 
 if(canvas){
     canvas.addEventListener('mousemove', onMouseMove);
@@ -109,6 +126,7 @@ if(canvas){
     canvas.addEventListener('mouseup', stopPainting);
     canvas.addEventListener('mouseleave',stopPainting);
     canvas.addEventListener('click', handleCanvasClick);
+    canvas.addEventListener('contextmenu', handleCM);
 }
 
 if(mode) {
@@ -117,6 +135,10 @@ if(mode) {
 
 if(clear){
     clear.addEventListener('click', clearCanvas);
+}
+
+if(save){
+    save.addEventListener('click', saveCanvas);
 }
 
 
