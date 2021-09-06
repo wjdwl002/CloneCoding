@@ -47,6 +47,10 @@ function changeTheme(event){
     sidebar[0].style.background = colorsSample[themeIndex][4];
     sidebar[0].style.color = colorsSample[themeIndex][2];
     ctx.strokeStyle = colorsSample[themeIndex][0];
+    
+    ctx.strokeStyle = "white";
+    ctx.fillStyle = "white";
+    console.log(ctx.strokeStyle);
 }
 
 function clearCanvas(){
